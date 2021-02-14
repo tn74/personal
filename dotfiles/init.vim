@@ -1,4 +1,3 @@
-
 call plug#begin('~/.vim/plugged')
 
 " Colorscheme
@@ -20,7 +19,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'peitalin/vim-jsx-typescript'
 
-" Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 " Pane Navigation
@@ -34,32 +32,21 @@ set termguicolors
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 
-filetype plugin indent on
+" Use filetype detection
+filetype plugin on
 
-" let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+" Show file path in git repo in lightline.
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \ }
+      \ }
 
-" Typescript and React syntax Highlighting 
-
-" set filetypes as typescriptreact
-"augroup SyntaxSettings
-"    autocmd!
-"autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
-"augroup END
-
-" " dark red
-" hi tsxTagName guifg=#E06C75
-" hi tsxComponentName guifg=#E06C75
-" hi tsxCloseComponentName guifg=#E06C75
-" 
-" " orange
-" hi tsxCloseString guifg=#F99575
-" hi tsxCloseTag guifg=#F99575
-" hi tsxCloseTagName guifg=#F99575
-" hi tsxAttributeBraces guifg=#F99575
-" hi tsxEqual guifg=#F99575
-" 
-" " yellow
-" hi tsxAttrib guifg=#F8BD7F cterm=italic
-
-
-
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction

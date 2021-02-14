@@ -2,11 +2,11 @@
 
 # Start the shell with tmux
 shell:
-  program: /usr/local/bin/zsh
+  program: zsh
   args:
     - -l
     - -c
-    - "tmux"
+    - "tmux kill-server; tmux"
 
 
 # Colors (Ayu Dark)
@@ -37,8 +37,12 @@ colors:
     magenta: '0xb77ee0'
     cyan:    '0x5ccfe6'
     white:   '0xffffff'
-key_bindings:
 
+key_bindings:
+  ####################################################################################################
+  #############################################   Mac    #############################################
+  ####################################################################################################
+  
   # New tab.
   - { key: T,        mods: Command,       chars: "\x01\x63" }
 
@@ -77,5 +81,46 @@ key_bindings:
   - { key: J,        mods: Command, chars: "\x01\x1bOB" }
   - { key: K,        mods: Command, chars: "\x01\x1bOA" }
   - { key: L,        mods: Command, chars: "\x01\x1bOC" }
-        
 
+
+  ####################################################################################################
+  #############################################   Linux    ###########################################
+  ####################################################################################################
+  
+  # New tab.
+  - { key: T,        mods: Alt,       chars: "\x01\x63" }
+
+  # Close tab.
+  - { key: X,        mods: Alt|Shift, chars: "\x01\x26" }
+
+  # Move one tab right.
+  - { key: RBracket, mods: Alt|Shift, chars: "\x01\x6e" }
+
+  # Move one tab left.
+  - { key: LBracket, mods: Alt|Shift, chars: "\x01\x70" }
+
+  # Move to tab x.
+  - { key: Key1,     mods: Alt,       chars: "\x01\x31" }
+  - { key: Key2,     mods: Alt,       chars: "\x01\x32" }
+  - { key: Key3,     mods: Alt,       chars: "\x01\x33" }
+  - { key: Key4,     mods: Alt,       chars: "\x01\x34" }
+  - { key: Key5,     mods: Alt,       chars: "\x01\x35" }
+  - { key: Key6,     mods: Alt,       chars: "\x01\x36" }
+  - { key: Key7,     mods: Alt,       chars: "\x01\x37" }
+  - { key: Key8,     mods: Alt,       chars: "\x01\x38" }
+  - { key: Key9,     mods: Alt,       chars: "\x01\x39" }
+
+  # New vertical pane.
+  - { key: D,        mods: Alt,       chars: "\x01\x25" }
+    
+  # New horizontal pane.
+  - { key: D,        mods: Alt|Shift, chars: "\x01\x22" }
+
+  # Close pane.
+  - { key: X,        mods: Alt, chars: "\x01\x78" }
+  - { key: W,        mods: Alt, chars: "\x01\x78" }
+
+  # Move panes vim style.  - { key: H,        mods: Alt, chars: "\x01\x1bOD" }
+  - { key: J,        mods: Alt, chars: "\x01\x1bOB" }
+  - { key: K,        mods: Alt, chars: "\x01\x1bOA" }
+  - { key: L,        mods: Alt, chars: "\x01\x1bOC" }
