@@ -120,7 +120,8 @@ key_bindings:
   - { key: X,        mods: Alt, chars: "\x01\x78" }
   - { key: W,        mods: Alt, chars: "\x01\x78" }
 
-  # Move panes vim style.  - { key: H,        mods: Alt, chars: "\x01\x1bOD" }
+  # Move panes vim style.  
+  - { key: H,        mods: Alt, chars: "\x01\x1bOD" }
   - { key: J,        mods: Alt, chars: "\x01\x1bOB" }
   - { key: K,        mods: Alt, chars: "\x01\x1bOA" }
   - { key: L,        mods: Alt, chars: "\x01\x1bOC" }
