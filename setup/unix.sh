@@ -1,14 +1,14 @@
 # Alacritty
-mkdir -p "$HOME/.config/alacritty" && curl -Lo "$HOME/.config/alacritty/alacritty.yml" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/alacritty.yml"
+mkdir -p "$HOME/.config/alacritty" && curl -L "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/alacritty.yml" > "$HOME/.config/alacritty/alacritty.yml" 
 
 # vim 
-curl -Lo "$HOME/.vimrc" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/init.vim"
+curl -L "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/init.vim" > "$HOME/.vimrc"
 
 # nvim
 # mkdir -p "$HOME/.config/nvim" && curl -Lo "$HOME/.config/nvim/init.vim" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/init.vim"
 
 # tmux
-curl -Lo "$HOME/.tmux.conf" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/tmux.conf"
+curl -L  "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/tmux.conf" > "$HOME/.tmux.conf"
 
 # p10k
-curl -Lo "$HOME/.p10k.zsh" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/p10k.zsh"
+curl -L "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/p10k.zsh" > "$HOME/.p10k.zsh" 
