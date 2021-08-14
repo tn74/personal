@@ -125,3 +125,7 @@ key_bindings:
   - { key: J,        mods: Alt, chars: "\x01\x1bOB" }
   - { key: K,        mods: Alt, chars: "\x01\x1bOA" }
   - { key: L,        mods: Alt, chars: "\x01\x1bOC" }
+
+  - { key: V,        mods: Alt, action: Paste }
+  - { key: C,        mods: Alt, action: Copy  }
+
