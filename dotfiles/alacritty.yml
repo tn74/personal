@@ -45,24 +45,27 @@ window:
   # Startup Mode (changes require restart)
   startup_mode: Fullscreen
 
+# Monaco is the default font on mac iterm2, but it doesn't work well on linux,
+# so leaving it commented in the default config.
+#
 # Sample Font configuration for font: Monaco.
 # Feel free to use different font configuration family & face for each sections
-font:
-  # Normal font face - Also used to draw glyphs on tmux & VIM
-  # NOTE: You may use any font you'd like but make sure the normal fonts
-  # support ligatures/glyphs. That's used by tmux & VIM to provide a better
-  # UI for powerline & tmux bottom bar.
-  normal:
-    # Font name
-    family: Monaco
-    # Font face
-    style: Regular
-
-  # Font size
-  size: 14.0
-
-  # Better font rendering for mac
-  use_thin_strokes: true
+# font:
+#   # Normal font face - Also used to draw glyphs on tmux & VIM
+#   # NOTE: You may use any font you'd like but make sure the normal fonts
+#   # support ligatures/glyphs. That's used by tmux & VIM to provide a better
+#   # UI for powerline & tmux bottom bar.
+#   normal:
+#     # Font name
+#     family: Monaco
+#     # Font face
+#     style: Regular
+#
+#   # Font size
+#   size: 14.0
+#
+#  # Better font rendering for mac
+#  use_thin_strokes: true
 
 key_bindings:
   ####################################################################################################

@@ -5,7 +5,7 @@ mkdir -p "$HOME/.config/alacritty" && curl -L "https://raw.githubusercontent.com
 curl -L "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/init.vim" > "$HOME/.vimrc"
 
 # nvim
-# mkdir -p "$HOME/.config/nvim" && curl -Lo "$HOME/.config/nvim/init.vim" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/init.vim"
+mkdir -p "$HOME/.config/nvim" && curl -Lo "$HOME/.config/nvim/init.vim" "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/init.vim"
 
 # tmux
 curl -L  "https://raw.githubusercontent.com/tn74/personal/master/dotfiles/tmux.conf" > "$HOME/.tmux.conf"
