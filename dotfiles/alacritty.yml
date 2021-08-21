@@ -6,7 +6,7 @@ shell:
   args:
     - -l
     - -c
-    - "tmux kill-server; tmux"
+    - "tmux attach"
 
 
 # Colors (Ayu Dark)
@@ -37,6 +37,32 @@ colors:
     magenta: '0xb77ee0'
     cyan:    '0x5ccfe6'
     white:   '0xffffff'
+
+window:
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
+
+  # Startup Mode (changes require restart)
+  startup_mode: Fullscreen
+
+# Sample Font configuration for font: Monaco.
+# Feel free to use different font configuration family & face for each sections
+font:
+  # Normal font face - Also used to draw glyphs on tmux & VIM
+  # NOTE: You may use any font you'd like but make sure the normal fonts
+  # support ligatures/glyphs. That's used by tmux & VIM to provide a better
+  # UI for powerline & tmux bottom bar.
+  normal:
+    # Font name
+    family: Monaco
+    # Font face
+    style: Regular
+
+  # Font size
+  size: 14.0
+
+  # Better font rendering for mac
+  use_thin_strokes: true
 
 key_bindings:
   ####################################################################################################
