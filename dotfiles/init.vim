@@ -52,8 +52,10 @@ set number
 " Scrolling mouse scrolls vim, not the terminal
 set mouse=a
 
+" Copy filepath to clipboard
+nmap clr :let @+ = expand("%")<cr>
 " Copy line pointer to clipboard
-nmap cp :let @+ = expand("%") . line(".")<cr>
+nmap clr :let @+ = expand("%") . ":" line(".")<cr>
 
 " Show file path in git repo in lightline.
 let g:lightline = {
