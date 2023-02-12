@@ -9,10 +9,6 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Git
-Plug 'tpope/vim-fugitive'
-
-
 " Status Line
 Plug 'itchyny/lightline.vim'
 
@@ -24,15 +20,36 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'peitalin/vim-jsx-typescript'
 "
 " Go
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 call plug#end()
+
+
+" escape to normal mode using jj
+inoremap jj <ESC>
+tnoremap jj <ESC>
 
 " Pane Navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+
+
+" Terminal
+" vim-powered terminal in split window
+map <Leader>t :term ++close<cr>
+tmap <Leader>t <c-w>:term ++close<cr>
+tmap <Leader>jj <c-w>:term ++close<cr>
+
+" vim-powered terminal in new tab
+map <Leader>T :tab term ++close<cr>
+tmap <Leader>T <c-w>:tab term ++close<cr>
 
 " Color Scheme
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -41,21 +58,18 @@ set termguicolors
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 
+set softtabstop=-1
+
 " Use filetype detection
 filetype plugin on
+autocmd FileType python setlocal shiftwidth=2 tabstop=2
+autocmd FileType go setlocal shiftwidth=2 tabstop=2
 
-" Tab visualization and line numbers
-set shiftwidth=0
-set tabstop=2
+" Show line numbers
 set number
 
 " Scrolling mouse scrolls vim, not the terminal
 set mouse=a
-
-" Copy filepath to clipboard
-nmap clr :let @+ = expand("%")<cr>
-" Copy line pointer to clipboard
-nmap clr :let @+ = expand("%") . ":" line(".")<cr>
 
 " Show file path in git repo in lightline.
 let g:lightline = {
@@ -75,6 +89,7 @@ endfunction
 
 " ctrl-p maps to FZF
 nnoremap <C-p> :Files<Cr>
+nnoremap <C-[> :Rg<CR>
 " - Popup window (anchored to the bottom of the current window)
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
 let g:fzf_action = {
@@ -114,6 +129,9 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
+" Use clipboard as default register
+set clipboard=unnamed
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -140,3 +158,14 @@ endif
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+
+
+""" NERDTree
+
+" Start when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
