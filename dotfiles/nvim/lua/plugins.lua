@@ -28,14 +28,17 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
 
-  use 'SirVer/ultisnips'
-  use 'quangnguyen30192/cmp-nvim-ultisnips'
-  use 'honza/vim-snippets'
+  use 'hashivim/vim-terraform'
   use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
 
-  -- Languages
-  use 'hashivim/vim-terraform'
-  -- use 'fatih/vim-go'
+  -- snippets
+  use({
+    "L3MON4D3/LuaSnip",
+  	-- follow latest release.
+  	tag = "v<CurrentMajor>.*",
+  	-- install jsregexp (optional!:).
+  	run = "make install_jsregexp"
+  })
 end)
 
 require('lualine').setup {
