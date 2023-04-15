@@ -39,6 +39,7 @@ require('packer').startup(function(use)
   	-- install jsregexp (optional!:).
   	run = "make install_jsregexp"
   })
+  use { 'saadparwaiz1/cmp_luasnip' }
 end)
 
 require('lualine').setup {
@@ -74,5 +75,3 @@ require('telescope').setup {
         },
     },
 }
-
-require("cmp_nvim_ultisnips").setup {}
