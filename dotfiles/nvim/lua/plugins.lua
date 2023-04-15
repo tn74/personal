@@ -2,18 +2,22 @@ require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- File Exploration
-  use 'preservim/nerdtree'
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-
   -- Visual Effects
   use 'ayu-theme/ayu-vim'
   use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
+  -- Git
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-rhubarb'
+
+  -- File Exploration
+  use 'preservim/nerdtree'
+  use {
+      'nvim-telescope/telescope.nvim', tag = '0.1.1',
+      requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   -- Code Navigation and Writing
@@ -23,26 +27,49 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+
   use 'SirVer/ultisnips'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
-  use({"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"})
+  use 'honza/vim-snippets'
+  use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
+
+  -- Languages
+  use 'hashivim/vim-terraform'
+  -- use 'fatih/vim-go'
 end)
 
-require('lualine').setup()
-
-
-require('telescope').setup{
-  defaults = {
-    -- Default configuration for telescope goes here:
-    -- config_key = value,
-    mappings = {
-      n = {
-        -- map actions.which_key to <C-h> (default: <C-/>)
-        -- actions.which_key shows the mappings for your picker,
-        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        ["s"] = "file_split",
-        ["v"] = "file_vsplit",
-      },
+require('lualine').setup {
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = {
+            {
+                'filename',
+                file_status = true, -- displays file status (readonly status, modified status)
+                path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+            }
+        },
+        lualine_c = { 'branch', 'diff', 'diagnostics' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
     },
-  },
 }
+
+
+require('telescope').setup {
+    defaults = {
+        -- Default configuration for telescope goes here:
+        -- config_key = value,
+        mappings = {
+            n = {
+                -- map actions.which_key to <C-h> (default: <C-/>)
+                -- actions.which_key shows the mappings for your picker,
+                -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                ["i"] = "file_split",
+                ["s"] = "file_vsplit",
+            },
+        },
+    },
+}
+
+require("cmp_nvim_ultisnips").setup {}
