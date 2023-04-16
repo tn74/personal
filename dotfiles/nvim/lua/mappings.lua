@@ -38,6 +38,3 @@ keymap('n', '<leader>ff', ts.find_files, {})
 keymap('n', '<leader>fg', ts.live_grep, {})
 keymap('n', '<leader>fb', ts.buffers, {})
 keymap('n', '<leader>fh', ts.help_tags, {})
-
--- LSP Shortcutes
-keymap('n', '<leader>rn', ":lua vim.lsp.rename(", default_opts)

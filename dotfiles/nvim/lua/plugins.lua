@@ -20,16 +20,12 @@ require('packer').startup(function(use)
       requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
-  -- Code Navigation and Writing
+  --  LSP
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-
-  use 'hashivim/vim-terraform'
-  use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
+  -- use 'hashivim/vim-terraform'
+  -- use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
 
   -- snippets
   use({
@@ -39,7 +35,17 @@ require('packer').startup(function(use)
   	-- install jsregexp (optional!:).
   	run = "make install_jsregexp"
   })
-  use { 'saadparwaiz1/cmp_luasnip' }
+  use 'rafamadriz/friendly-snippets'
+  use 'saadparwaiz1/cmp_luasnip'
+
+
+  -- Completion Engine 
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+
 end)
 
 require('lualine').setup {

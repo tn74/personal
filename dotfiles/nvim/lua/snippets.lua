@@ -1,7 +1,9 @@
 
-ls = require("luasnip")
-types = require("luasnip.util.types")
-loaders = require("luasnip.loaders")
+local keymap = vim.keymap.set
+local default_opts = { noremap = true, silent = true }
+local ls = require("luasnip")
+local types = require("luasnip.util.types")
+local loaders = require("luasnip.loaders")
 
 ls.config.set_config{
   -- This tells LuaSnippet to remember the last snippet
@@ -15,9 +17,13 @@ ls.config.set_config{
 }
 
 
-ls.add_snippets( "all", {
-  ls.parser.parse_snippet(
-    'func',
-    'function ${1}(${2}) \n{\n\t${3}\n}'),
-  }
-)
+vim.keymap.set("i", '<leader>sf', 
+ function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end, 
+default_opts)
+
+
+vim.keymap.set("i", '<leader>sb', 
+ function() if ls.jumpable(-1) then ls.jump(-1) end end, 
+default_opts)
+
+require("luasnip/loaders/from_vscode").lazy_load() 
