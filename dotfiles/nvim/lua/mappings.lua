@@ -7,9 +7,9 @@ local ls = require('luasnip')
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Better escape using jk in insert and terminal mode
+-- Better escape using jj in insert and terminal mode
 keymap("i", "jj", "<ESC>", default_opts)
-keymap("t", "jj", "<C-\\><C-n>", default_opts)
+keymap("t", "<leader>jj", "<C-\\><C-n>", default_opts)
 
 -- In-Tab Buffer Navigation
 keymap("n", "<leader>h", "<C-w>h", default_opts)
@@ -18,16 +18,19 @@ keymap("n", "<leader>k", "<C-w>k", default_opts)
 keymap("n", "<leader>l", "<C-w>l", default_opts)
 
 -- Tab Navigation
-keymap("n", "<leader>b", ":tabnew<Enter>", default_opts) -- Launch a terminal in horizontal split
-keymap("n", "<leader>1", "1gt", default_opts) -- Launch a terminal in horizontal split
-keymap("n", "<leader>2", "2gt", default_opts) -- Launch a terminal in horizontal split
-keymap("n", "<leader>3", "3gt", default_opts) -- Launch a terminal in horizontal split
-keymap("n", "<leader>4", "4gt", default_opts) -- Launch a terminal in horizontal split
-keymap("n", "<leader>5", "5gt", default_opts) -- Launch a terminal in horizontal split
+keymap("n", "<leader>b", ":tabnew<Enter>", default_opts)
+keymap("n", "<leader>1", "1gt", default_opts)
+keymap("n", "<leader>2", "2gt", default_opts)
+keymap("n", "<leader>3", "3gt", default_opts)
+keymap("n", "<leader>4", "4gt", default_opts)
+keymap("n", "<leader>5", "5gt", default_opts)
 
 -- Terminal Creation
-keymap("n", "<leader>t", ":split <Enter> :term <Enter>", default_opts) -- Launch a terminal in horizontal split
-keymap("n", "<leader>T", ":vsplit <Enter> :term <Enter>", default_opts) -- Launch a termina lin vertical split
+keymap("n", "<leader>t", ":term <Enter>", default_opts) -- Launch a terminal in horizontal split
+
+-- Buffer Creation
+keymap("n", "<leader>s", ":new <Enter>", default_opts)
+keymap("n", "<leader>v", ":vnew <Enter>", default_opts)
 
 -- Shorthands
 keymap("n", "<leader>w", ":w<Enter>", default_opts) -- Write current buffer
@@ -38,3 +41,6 @@ keymap('n', '<leader>ff', ts.find_files, {})
 keymap('n', '<leader>fg', ts.live_grep, {})
 keymap('n', '<leader>fb', ts.buffers, {})
 keymap('n', '<leader>fh', ts.help_tags, {})
+
+keymap('n', 'fs', ":NERDTree %:p:h <Enter>", default_opts)
+keymap('n', 'ft', ":NERDTreeToggle <Enter>", default_opts)
