@@ -38,7 +38,7 @@ require('packer').startup(function(use)
   })
   use 'rafamadriz/friendly-snippets'
   use 'saadparwaiz1/cmp_luasnip'
-  use 'danymat/neogen'
+  --  use 'danymat/neogen'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
 
