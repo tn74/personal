@@ -4,8 +4,8 @@ local expr_opts = { noremap = true, expr = true, silent = true }
 local ts = require('telescope.builtin')
 local ls = require('luasnip')
 
--- vim.g.mapleader = " "
--- vim.g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Better escape using jj in insert and terminal mode
 keymap("i", "jj", "<ESC>", default_opts)
@@ -42,3 +42,6 @@ keymap('n', ' fh', ts.help_tags, {})
 
 keymap('n', 'fs', ":NERDTree %:p:h <Enter>", default_opts)
 keymap('n', 'ft', ":NERDTreeToggle <Enter>", default_opts)
+
+keymap('n', ' cf', ":cn <Enter>", default_opts)
+keymap('n', ' cb', ":cN <Enter>", default_opts)

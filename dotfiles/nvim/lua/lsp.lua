@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
     -- Renames all references to the symbol under the cursor
-    bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
 
     -- Selects a code action available at the current cursor position
     bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
@@ -55,15 +55,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Move to the next diagnostic
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-
-    -- Move to the next diagnostic
-    bufmap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
   end
 })
 
-
--- LSP Shortcutes
-vim.keymap.set('n', '<leader>rn', ":lua vim.lsp.rename(", default_opts)
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -85,31 +79,9 @@ lspconfig.gopls.setup {                                 -- go
 }
 vim.g.go_gopls_enabled = 0                                            -- Disable vim-go gopls use
 lspconfig.jedi_language_server.setup({ capabilities = capabilities }) --python
-lspconfig.terraformls.setup({ capabilities = capabilities })          -- terraform
-
-lspconfig.rust_analyzer.setup({
-  settings = {
-    ["rust-analyzer"] = {
-      imports = {
-        granularity = {
-          group = "module",
-        },
-        prefix = "self",
-      },
-      cargo = {
-        buildScripts = {
-          enable = true,
-        },
-      },
-      procMacro = {
-        enable = true
-      },
-    }
-  }
-})
 
 -- Autoformat on save
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
 -- Go organize imports
 vim.api.nvim_create_autocmd('BufWritePre', {
