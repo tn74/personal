@@ -1,8 +1,8 @@
 local keymap = vim.keymap.set
 local default_opts = { noremap = true, silent = true }
-local expr_opts = { noremap = true, expr = true, silent = true }
 local ts = require('telescope.builtin')
-local ls = require('luasnip')
+
+vim.cmd("colorschem ayu")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

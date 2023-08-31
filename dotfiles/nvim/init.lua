@@ -1,7 +1,6 @@
 require("options")
-require("mappings")
 require("commands")
 require("plugins")
-require("snippets")
 require("lsp")
 require("comp")
+require("mappings")
