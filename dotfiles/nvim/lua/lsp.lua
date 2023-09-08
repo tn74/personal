@@ -2,13 +2,6 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 local lspconfig = require('lspconfig')
-local lsp_defaults = lspconfig.util.default_config
-
-lsp_defaults.capabilities = vim.tbl_deep_extend(
-  'force',
-  lsp_defaults.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
-)
 
 -- Shortcuts to take advantage of LSP features
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -60,10 +53,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Language Servers
-lspconfig.lua_ls.setup({ capabilities = capabilities }) --lua
+lspconfig.lua_ls.setup({}) --lua
 lspconfig.gopls.setup {                                 -- go
   cmd = { "gopls", "serve" },
   filetypes = { "go", "gomod" },
@@ -78,7 +70,6 @@ lspconfig.gopls.setup {                                 -- go
   },
 }
 vim.g.go_gopls_enabled = 0                                            -- Disable vim-go gopls use
-lspconfig.jedi_language_server.setup({ capabilities = capabilities }) --python
 
 -- Autoformat on save
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
