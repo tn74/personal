@@ -18,30 +18,35 @@ keymap("n", "<C-k>", "<C-w>k", default_opts)
 keymap("n", "<C-l>", "<C-w>l", default_opts)
 
 -- Tab Navigation
-keymap("n", " b", ":tabnew<Enter>", default_opts)
-keymap("n", " 1", "1gt", default_opts)
-keymap("n", " 2", "2gt", default_opts)
-keymap("n", " 3", "3gt", default_opts)
-keymap("n", " 4", "4gt", default_opts)
-keymap("n", " 5", "5gt", default_opts)
+keymap("n", "<leader>b", ":tabnew<Enter>", default_opts)
+keymap("n", "<leader>1", "1gt", default_opts)
+keymap("n", "<leader>2", "2gt", default_opts)
+keymap("n", "<leader>3", "3gt", default_opts)
+keymap("n", "<leader>4", "4gt", default_opts)
+keymap("n", "<leader>5", "5gt", default_opts)
 keymap("n", "<C-n>", "gT", default_opts)
 keymap("n", "<C-m>", "gt", default_opts)
 
 -- Terminal Creation
-keymap("n", " t", ":term <Enter>", default_opts) -- Launch a terminal in horizontal split
+keymap("n", "<leader>t", ":term <Enter>", default_opts) -- Launch a terminal in horizontal split
 
 -- Buffer Creation
-keymap("n", " s", ":new <Enter>", default_opts)
-keymap("n", " v", ":vnew <Enter>", default_opts)
+keymap("n", "<leader>s", ":new <Enter>", default_opts)
+keymap("n", "<leader>v", ":vnew <Enter>", default_opts)
 
 -- Telescope Shortcuts
-keymap('n', ' ff', ts.find_files, {})
-keymap('n', ' fg', ts.live_grep, {})
-keymap('n', ' fb', ts.buffers, {})
-keymap('n', ' fh', ts.help_tags, {})
+keymap("n", "<leader>ff", ts.find_files, {})
+keymap("n", "<leader>fg", ts.live_grep, {})
+keymap("n", "<leader>fb", ts.buffers, {})
+keymap("n", "<leader>fh", ts.help_tags, {})
 
-keymap('n', 'fs', ":NERDTree %:p:h <Enter>", default_opts)
-keymap('n', 'ft', ":NERDTreeToggle <Enter>", default_opts)
 
-keymap('n', ' cf', ":cn <Enter>", default_opts)
-keymap('n', ' cb', ":cN <Enter>", default_opts)
+-- Command Shortcuts
+keymap("n", "fs", ":NERDTree %:p:h <Enter>", default_opts)
+keymap("n", "ft", ":NERDTreeToggle <Enter>", default_opts)
+
+keymap("n", "<leader>cf", ":cn <Enter>", default_opts)
+keymap("n", "<leader>cb", ":cN <Enter>", default_opts)
+
+keymap("n", "<leader>gf", ":Git Blame <Enter>", default_opts)
+keymap("n", "<leader>gr", ":GBrowse <Enter>", default_opts)
