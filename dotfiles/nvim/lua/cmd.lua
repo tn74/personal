@@ -1,10 +1,19 @@
-require("mason").setup()
-require("mason-lspconfig").setup()
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
-local lspconfig = require('lspconfig')
+vim.cmd("colorschem ayu")
+
+augroup('setIndent', { clear = true })
+autocmd('Filetype', {
+  group = 'setIndent',
+  pattern = { 'python' },
+  command = 'setlocal shiftwidth=2 tabstop=2'
+})
 
 -- Shortcuts to take advantage of LSP features
-vim.api.nvim_create_autocmd('LspAttach', {
+augroup('lsp', { clear = true })
+autocmd('LspAttach', {
+  group = 'lsp',
   desc = 'LSP actions',
   callback = function()
     local bufmap = function(mode, lhs, rhs)
@@ -44,39 +53,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 
     -- Move to the previous diagnostic
-    bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    bufmap('n', '<leader>db', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 
     -- Move to the next diagnostic
-    bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+    bufmap('n', '<leader>df', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
 
-
--- Set up lspconfig.
-
--- Language Servers
-lspconfig.lua_ls.setup({}) --lua
-lspconfig.gopls.setup {                                 -- go
-  cmd = { "gopls", "serve" },
-  filetypes = { "go", "gomod" },
-  root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-    },
-  },
-}
-vim.g.go_gopls_enabled = 0                                            -- Disable vim-go gopls use
-
--- Autoformat on save
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
-
 -- Go organize imports
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.go',
+autocmd('BufWritePre', {
+  group = 'lsp',
+  pattern = {'*.go'},
   callback = function()
     vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
   end

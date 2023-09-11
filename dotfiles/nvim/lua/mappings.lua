@@ -1,11 +1,9 @@
 local keymap = vim.keymap.set
 local default_opts = { noremap = true, silent = true }
-local ts = require('telescope.builtin')
-
-vim.cmd("colorschem ayu")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
 
 -- Better escape using jj in insert and terminal mode
 keymap("i", "jj", "<ESC>", default_opts)
@@ -35,18 +33,23 @@ keymap("n", "<leader>s", ":new <Enter>", default_opts)
 keymap("n", "<leader>v", ":vnew <Enter>", default_opts)
 
 -- Telescope Shortcuts
+local ts = require('telescope.builtin')
 keymap("n", "<leader>ff", ts.find_files, {})
-keymap("n", "<leader>fg", ts.live_grep, {})
+keymap("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {})
 keymap("n", "<leader>fb", ts.buffers, {})
 keymap("n", "<leader>fh", ts.help_tags, {})
 
 
 -- Command Shortcuts
-keymap("n", "fs", ":NERDTree %:p:h <Enter>", default_opts)
-keymap("n", "ft", ":NERDTreeToggle <Enter>", default_opts)
+keymap("n", "<leader>es", ":NERDTree %:p:h <Enter>", default_pots)
+keymap("n", "<leader>ee", ":NERDTreeToggle <Enter>", default_opts)
 
-keymap("n", "<leader>cf", ":cn <Enter>", default_opts)
-keymap("n", "<leader>cb", ":cN <Enter>", default_opts)
+-- Quickfix
+keymap("n", "<leader>co", ":copen <Enter>", default_opts)
+keymap("n", "<leader>cc", ":cclose <Enter>", default_opts)
+keymap("n", "<leader>cn", ":cn <Enter>", default_opts)
+keymap("n", "<leader>cN", ":cN <Enter>", default_opts)
 
-keymap("n", "<leader>gf", ":Git Blame <Enter>", default_opts)
+keymap("n", "<leader>gb", ":Git Blame <Enter>", default_opts)
 keymap("n", "<leader>gr", ":GBrowse <Enter>", default_opts)
+

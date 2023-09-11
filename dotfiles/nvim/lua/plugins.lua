@@ -40,12 +40,14 @@ require('packer').startup(function(use)
       }
     end
   }
+
   use {
-    'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
+    'nvim-treesitter/nvim-treesitter', 
+    run = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+        ensure_installed = { "c", "lua", "vim", "go", "typescript", "python"},
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
@@ -73,6 +75,14 @@ require('packer').startup(function(use)
   -- Git
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
+  use {
+    'f-person/git-blame.nvim',
+    config= function()
+     require('gitblame').setup({
+      enabled = true,
+     })
+    end
+  }
 
   -- File Exploration
   use 'preservim/nerdtree'
@@ -80,19 +90,24 @@ require('packer').startup(function(use)
   -- Telescope and Plugins
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
+      { 'BurntSushi/ripgrep' },
+    },
     config = function() 
+      local lga_actions = require("telescope-live-grep-args.actions")
       require('telescope').setup {
         defaults = {
           -- Default configuration for telescope goes here:
           -- config_key = value,
           mappings = {
-            n = {
+            i = {
               -- map actions.which_key to <C-h> (default: <C-/>)
               -- actions.which_key shows the mappings for your picker,
               -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-              ["i"] = "file_split",
-              ["s"] = "file_vsplit",
+              ["<C-i>"] = "file_split",
+              ["<C-s>"] = "file_vsplit",
             },
           },
         },
@@ -103,30 +118,68 @@ require('packer').startup(function(use)
             override_file_sorter = true,    -- override the file sorter
             case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
+          },
+          live_grep_args = {
+            auto_quoting = true, -- enable/disable auto-quoting
+            -- define mappings, e.g.
+            mappings = { -- extend mappings
+              i = {
+                ["<C-k>"] = lga_actions.quote_prompt(),
+                ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              },
+            },
+            -- ... also accepts theme settings, for example:
+            -- theme = "dropdown", -- use dropdown theme
+            -- theme = { }, -- use own theme spec
+            -- layout_config = { mirror=true }, -- mirror preview pane
           }
         }
       }
       -- To get fzf loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
       require('telescope').load_extension('fzf')
+      require('telescope').load_extension("live_grep_args")
     end
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   --  LSP
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'hashivim/vim-terraform'
-  -- use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
+  use {
+    'neovim/nvim-lspconfig',
+    requires = {
+      { 'williamboman/mason-lspconfig.nvim' },
+      { 'williamboman/mason.nvim' },
+    },
+    config= function()
+      require("mason").setup()
+      require("mason-lspconfig").setup()
+      local lspconfig = require('lspconfig')
+      -- Language Servers
+      lspconfig.lua_ls.setup({}) --lua
+      lspconfig.gopls.setup {                                 -- go
+        cmd = { "gopls", "serve" },
+        filetypes = { "go", "gomod" },
+        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      }
+    end
+  }
 
   -- Completion Engine
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
-  use { 'hrsh7th/nvim-cmp',
-    configure = function() 
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function()
       local cmp = require 'cmp'
       cmp.setup({
         window = {
@@ -159,10 +212,8 @@ require('packer').startup(function(use)
     end
   }
 
-  -- Go
-   use 'fatih/vim-go'
+  use {
+    "windwp/nvim-autopairs",
+      config = function() require("nvim-autopairs").setup {} end
+  }
 end)
-
-
-
-
