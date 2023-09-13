@@ -106,8 +106,9 @@ require('packer').startup(function(use)
               -- map actions.which_key to <C-h> (default: <C-/>)
               -- actions.which_key shows the mappings for your picker,
               -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-              ["<C-i>"] = "file_split",
+              ["<C-v>"] = "file_split",
               ["<C-s>"] = "file_vsplit",
+              ["<C-d>"] = "delete_buffer",
             },
           },
         },
@@ -132,12 +133,13 @@ require('packer').startup(function(use)
             -- theme = "dropdown", -- use dropdown theme
             -- theme = { }, -- use own theme spec
             -- layout_config = { mirror=true }, -- mirror preview pane
-          }
+          },
         }
       }
       -- To get fzf loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
       require('telescope').load_extension('fzf')
+      require('telescope').load_extension("live_grep_args")
       require('telescope').load_extension("live_grep_args")
     end
   }
@@ -156,6 +158,20 @@ require('packer').startup(function(use)
       local lspconfig = require('lspconfig')
       -- Language Servers
       lspconfig.lua_ls.setup({}) --lua
+      lspconfig.jedi_language_server.setup{}
+      lspconfig.gopls.setup {                                 -- go
+        cmd = { "gopls", "serve" },
+        filetypes = { "go", "gomod" },
+        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      }
       lspconfig.gopls.setup {                                 -- go
         cmd = { "gopls", "serve" },
         filetypes = { "go", "gomod" },
@@ -171,6 +187,14 @@ require('packer').startup(function(use)
       }
     end
   }
+
+  -- Language Tools
+  -- use { 
+  --   'fatih/vim-go',
+  --   config = function()
+  --     vim.g.go_gopls_enabled = 0
+  --   end
+  -- }
 
   -- Completion Engine
   use 'hrsh7th/cmp-nvim-lsp'

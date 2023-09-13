@@ -38,6 +38,8 @@ keymap("n", "<leader>ff", ts.find_files, {})
 keymap("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {})
 keymap("n", "<leader>fb", ts.buffers, {})
 keymap("n", "<leader>fh", ts.help_tags, {})
+keymap("n", "<leader>fv", ts.git_branches, {})
+keymap("n", "<leader>fs", ts.git_status, {})
 
 
 -- Command Shortcuts
@@ -50,6 +52,6 @@ keymap("n", "<leader>cc", ":cclose <Enter>", default_opts)
 keymap("n", "<leader>cn", ":cn <Enter>", default_opts)
 keymap("n", "<leader>cN", ":cN <Enter>", default_opts)
 
-keymap("n", "<leader>gb", ":Git Blame <Enter>", default_opts)
-keymap("n", "<leader>gr", ":GBrowse <Enter>", default_opts)
+keymap("n", "<leader>gb", ":Git blame <Enter>", default_opts)
+keymap("v", "g", ":GBrowse <Enter>", default_opts)
 
