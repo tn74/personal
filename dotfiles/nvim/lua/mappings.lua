@@ -49,6 +49,9 @@ keymap("n", "<leader>ee", ":NERDTreeToggle <Enter>", default_opts)
 -- Quickfix
 keymap("n", "<leader>co", ":copen <Enter>", default_opts)
 keymap("n", "<leader>cc", ":cclose <Enter>", default_opts)
+keymap("n", "F", ":cn <Enter>", default_opts)
+keymap("n", "D", ":cN <Enter>", default_opts)
+keymap("n", "<leader>cc", ":cclose <Enter>", default_opts)
 keymap("n", "<leader>cn", ":cn <Enter>", default_opts)
 keymap("n", "<leader>cN", ":cN <Enter>", default_opts)
 

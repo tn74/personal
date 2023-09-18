@@ -1,5 +1,10 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local bufmap = function(mode, lhs, rhs)
+  local opts = { buffer = true }
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 
 vim.cmd("colorschem ayu")
 
@@ -16,11 +21,6 @@ autocmd('LspAttach', {
   group = 'lsp',
   desc = 'LSP actions',
   callback = function()
-    local bufmap = function(mode, lhs, rhs)
-      local opts = { buffer = true }
-      vim.keymap.set(mode, lhs, rhs, opts)
-    end
-
     -- Displays hover information about the symbol under the cursor
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
@@ -66,5 +66,13 @@ autocmd('BufWritePre', {
   pattern = {'*.go'},
   callback = function()
     vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+  end
+})
+
+-- Quickfix Window organize imports
+autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    bufmap('n', "<Enter>", "<C-w><Enter>")
   end
 })
