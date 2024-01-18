@@ -14,6 +14,7 @@ set.shiftwidth = 2
 set.smarttab = true
 set.swapfile = false
 set.splitright = true
+set.splitbelow = true
 set.tabstop = 2
 set.termguicolors = true
 set.title = true

@@ -83,6 +83,12 @@ require('packer').startup(function(use)
      })
     end
   }
+  use  {
+    'lewis6991/gitsigns.nvim',
+    config = function() 
+      require('gitsigns').setup()
+    end
+  }
 
   -- File Exploration
   use 'preservim/nerdtree'
@@ -158,20 +164,24 @@ require('packer').startup(function(use)
       local lspconfig = require('lspconfig')
       -- Language Servers
       lspconfig.lua_ls.setup({}) --lua
-      lspconfig.jedi_language_server.setup{}
-      lspconfig.gopls.setup {                                 -- go
-        cmd = { "gopls", "serve" },
-        filetypes = { "go", "gomod" },
-        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+      -- lspconfig.jedi_language_server.setup{}
+      lspconfig.pyright.setup{
+        on_attach = on_attach,
         settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            staticcheck = true,
+          pyright = {
+            autoImportCompletion = true
           },
-        },
-      }
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              autoImportCompletion = true,
+              diagnosticMode = 'openFilesOnly',
+              useLibraryCodeForTypes = true,
+              typeCheckingMode = 'off'
+            }
+          }
+        }
+      } 
       lspconfig.gopls.setup {                                 -- go
         cmd = { "gopls", "serve" },
         filetypes = { "go", "gomod" },
