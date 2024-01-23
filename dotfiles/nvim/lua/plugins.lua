@@ -92,6 +92,13 @@ require('packer').startup(function(use)
 
   -- File Exploration
   use 'preservim/nerdtree'
+  use {
+    'stevearc/aerial.nvim',
+    config=function()
+      require("aerial").setup()
+    end
+  }
+
 
   -- Telescope and Plugins
   use {

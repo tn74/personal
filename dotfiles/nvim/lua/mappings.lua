@@ -1,6 +1,22 @@
 local keymap = vim.keymap.set
 local default_opts = { noremap = true, silent = true }
 
+local bufnav = function (modes, char, forward, backward)
+  local backward_mv = string.format(';%s', char)
+  keymap(modes, backward_mv, function()
+    if vim.wo.diff then return backward_mv end
+    vim.schedule(function() backward() end)
+    return '<Ignore>'
+  end, {expr=true})
+
+  local forward_mv = string.format('\'%s', char)
+  keymap(modes, forward_mv, function()
+    if vim.wo.diff then return forward_mv end
+    vim.schedule(function() forward() end)
+    return '<Ignore>'
+  end, {expr=true})
+end
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -17,10 +33,10 @@ keymap("n", "<C-l>", "<C-w>l", default_opts)
 
 -- Tab Navigation
 keymap("n", "<leader>n", ":tabnew<Enter>", default_opts)
-keymap("n", "<leader>j", "1gt", default_opts)
-keymap("n", "<leader>k", "2gt", default_opts)
-keymap("n", "<leader>l", "3gt", default_opts)
-keymap("n", "<leader>;", "4gt", default_opts)
+keymap("n", "<leader>1", "1gt", default_opts)
+keymap("n", "<leader>2", "2gt", default_opts)
+keymap("n", "<leader>3", "3gt", default_opts)
+keymap("n", "<leader>4", "4gt", default_opts)
 
 -- Terminal Creation
 keymap("n", "<leader>t", ":term <Enter>", default_opts) -- Launch a terminal in horizontal split
@@ -49,7 +65,6 @@ keymap("n", "<leader>cc", ":cclose <Enter>", default_opts)
 keymap("n", "<leader>cn", ":cn <Enter>", default_opts)
 keymap("n", "<leader>cN", ":cN <Enter>", default_opts)
 keymap("n", "F", ":cn <Enter>", default_opts)
-keymap("n", "Y", ":cn <Enter>", default_opts)
 keymap("n", "D", ":cN <Enter>", default_opts)
 
 
@@ -76,18 +91,13 @@ keymap('n', '<leader>hD', function() gs.diffthis('~') end)
 keymap('n', '<leader>td', gs.toggle_deleted)
 keymap({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
--- Navigation
-keymap('n', ']c', function()
-  if vim.wo.diff then return ']c' end
-  vim.schedule(function() gs.next_hunk() end)
-  return '<Ignore>'
-end, {expr=true})
+-- Aerial
+local aerial = require("aerial")
+keymap('n', '<leader>a', ":AerialToggle<CR>")
 
-keymap('n', '[c', function()
-  if vim.wo.diff then return '[c' end
-  vim.schedule(function() gs.prev_hunk() end)
-  return '<Ignore>'
-end, {expr=true})
+-- Buffer Navigation
+bufnav('n', 'a', aerial.next, aerial.prev)
+bufnav('n', 's', gs.next_hunk, gs.prev_hunk)
+bufnav('n', 'd', vim.diagnostic.goto_next, vim.diagnostic.goto_next)
 
--- Reload 
 keymap('n', '<leader>r', ':lua _G.Reload() <Enter>', default_opts)
