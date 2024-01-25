@@ -102,7 +102,7 @@ require('packer').startup(function(use)
 
   -- Telescope and Plugins
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = {
       { 'nvim-lua/plenary.nvim' },
       { "nvim-telescope/telescope-live-grep-args.nvim" },
@@ -253,8 +253,10 @@ require('packer').startup(function(use)
     end
   }
 
+  -- Code Faster
   use {
     "windwp/nvim-autopairs",
       config = function() require("nvim-autopairs").setup {} end
   }
+  use "github/copilot.vim"
 end)
