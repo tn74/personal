@@ -91,6 +91,11 @@ keymap('n', '<leader>hD', function() gs.diffthis('~') end)
 keymap('n', '<leader>td', gs.toggle_deleted)
 keymap({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
+-- AI
+-- local cp = require('copilot.panel')
+keymap('n', '<leader>cp', ":Copilot panel <Enter>", default_opts)
+-- keymap('n', ';;', cp.open({}))
+
 -- Aerial
 local aerial = require("aerial")
 keymap('n', '<leader>a', ":AerialToggle<CR>")
