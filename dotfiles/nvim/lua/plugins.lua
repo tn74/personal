@@ -158,6 +158,8 @@ require('packer').startup(function(use)
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  use {}
+
   --  LSP
   use {
     'neovim/nvim-lspconfig',
@@ -171,24 +173,28 @@ require('packer').startup(function(use)
       local lspconfig = require('lspconfig')
       -- Language Servers
       lspconfig.lua_ls.setup({}) --lua
-      -- lspconfig.jedi_language_server.setup{}
+      lspconfig.ruff_lsp.setup {
+        init_options = {
+          settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {"--select", "ALL", "--ignore", "FA100"},
+          }
+        }
+      }
       lspconfig.pyright.setup{
-        on_attach = on_attach,
         settings = {
-          pyright = {
-            autoImportCompletion = true
+        pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
           },
           python = {
             analysis = {
-              autoSearchPaths = true,
-              autoImportCompletion = true,
-              diagnosticMode = 'openFilesOnly',
-              useLibraryCodeForTypes = true,
-              typeCheckingMode = 'off'
-            }
-          }
-        }
-      } 
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { '*' },
+            },
+          },
+        },
+      }
       lspconfig.gopls.setup {                                 -- go
         cmd = { "gopls", "serve" },
         filetypes = { "go", "gomod" },
