@@ -158,8 +158,6 @@ require('packer').startup(function(use)
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-  use {}
-
   --  LSP
   use {
     'neovim/nvim-lspconfig',
@@ -177,10 +175,19 @@ require('packer').startup(function(use)
         init_options = {
           settings = {
             -- Any extra CLI arguments for `ruff` go here.
-            args = {"--select", "ALL", "--ignore", "FA100"},
+            args = {
+              "--select", "ALL",
+              "--ignore", "FA100",
+              "--ignore", "PD",
+              "--ignore", "ANN101",
+              "--ignore", "EM",
+              "--ignore", "G004",
+              "--config", "lint.pydocstyle.convention='google'",
+            },
           }
         }
       }
+      -- Setting up pyright for go to def type behavior
       lspconfig.pyright.setup{
         settings = {
         pyright = {
@@ -209,6 +216,14 @@ require('packer').startup(function(use)
         },
       }
     end
+  }
+  use {
+    "danymat/neogen",
+    config = function()
+        require('neogen').setup{}
+    end,
+    -- Uncomment next line if you want to follow only stable versions
+    -- tag = "*"
   }
 
   -- Language Tools

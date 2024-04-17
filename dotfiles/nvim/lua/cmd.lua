@@ -47,16 +47,9 @@ autocmd('LspAttach', {
 
     -- Selects a code action available at the current cursor position
     bufmap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
 
     -- Show diagnostics in a floating window
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-
-    -- Move to the previous diagnostic
-    bufmap('n', '<leader>db', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-
-    -- Move to the next diagnostic
-    bufmap('n', '<leader>df', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 
     -- Format
     bufmap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format()<cr>')
