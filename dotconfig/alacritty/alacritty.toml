@@ -1,0 +1,251 @@
+[colors.bright]
+black = "0x737d87"
+blue = "0x59c2ff"
+cyan = "0x5ccfe6"
+green = "0xc2d94c"
+magenta = "0xb77ee0"
+red = "0xff3333"
+white = "0xffffff"
+yellow = "0xe7c547"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x73d0ff"
+cyan = "0x83CEC6"
+green = "0xbae67e"
+magenta = "0xd4bfff"
+red = "0xf34a4a"
+white = "0xf2f2f2"
+yellow = "0xffee99"
+
+[colors.primary]
+background = "0x070707"
+foreground = "0xe6e1cf"
+
+[[keyboard.bindings]]
+chars = "\u0001c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001&"
+key = "X"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001n"
+key = "RBracket"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001p"
+key = "LBracket"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u00011"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00012"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00013"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00014"
+key = "Key4"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00015"
+key = "Key5"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00016"
+key = "Key6"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00017"
+key = "Key7"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00018"
+key = "Key8"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00019"
+key = "Key9"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001%"
+key = "D"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001\""
+key = "D"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001x"
+key = "X"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001x"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOD"
+key = "H"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOB"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOA"
+key = "K"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOC"
+key = "L"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001c"
+key = "T"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001&"
+key = "X"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001n"
+key = "RBracket"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001p"
+key = "LBracket"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u00011"
+key = "Key1"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00012"
+key = "Key2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00013"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00014"
+key = "Key4"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00015"
+key = "Key5"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00016"
+key = "Key6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00017"
+key = "Key7"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00018"
+key = "Key8"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00019"
+key = "Key9"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001%"
+key = "D"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001\""
+key = "D"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001x"
+key = "X"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001x"
+key = "W"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOD"
+key = "H"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOB"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOA"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0001\u001BOC"
+key = "L"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Alt"
+
+[shell]
+args = ["-l", "-c", "tmux attach"]
+program = "zsh"
+
+[window]
+dynamic_padding = true
+startup_mode = "Fullscreen"
