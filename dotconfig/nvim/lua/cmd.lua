@@ -20,7 +20,7 @@ augroup('lsp', { clear = true })
 autocmd('LspAttach', {
   group = 'lsp',
   desc = 'LSP actions',
-  callback = function()
+  callback = function(args)
     -- Displays hover information about the symbol under the cursor
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
@@ -59,7 +59,7 @@ autocmd('LspAttach', {
 -- Go organize imports
 autocmd('BufWritePre', {
   group = 'lsp',
-  pattern = {'*.go'},
+  pattern = { '*.go' },
   callback = function()
     vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
   end

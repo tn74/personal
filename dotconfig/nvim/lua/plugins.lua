@@ -42,12 +42,12 @@ require('packer').startup(function(use)
   }
 
   use {
-    'nvim-treesitter/nvim-treesitter', 
+    'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = { "c", "lua", "vim", "go", "typescript", "python"},
+        ensure_installed = { "c", "lua", "vim", "go", "typescript", "python" },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
@@ -77,15 +77,15 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb'
   use {
     'f-person/git-blame.nvim',
-    config= function()
-     require('gitblame').setup({
-      enabled = true,
-     })
+    config = function()
+      require('gitblame').setup({
+        enabled = true,
+      })
     end
   }
-  use  {
+  use {
     'lewis6991/gitsigns.nvim',
-    config = function() 
+    config = function()
       require('gitsigns').setup()
     end
   }
@@ -94,7 +94,7 @@ require('packer').startup(function(use)
   use 'preservim/nerdtree'
   use {
     'stevearc/aerial.nvim',
-    config=function()
+    config = function()
       require("aerial").setup()
     end
   }
@@ -108,7 +108,7 @@ require('packer').startup(function(use)
       { "nvim-telescope/telescope-live-grep-args.nvim" },
       { 'BurntSushi/ripgrep' },
     },
-    config = function() 
+    config = function()
       local lga_actions = require("telescope-live-grep-args.actions")
       require('telescope').setup {
         defaults = {
@@ -136,7 +136,7 @@ require('packer').startup(function(use)
           live_grep_args = {
             auto_quoting = true, -- enable/disable auto-quoting
             -- define mappings, e.g.
-            mappings = { -- extend mappings
+            mappings = {         -- extend mappings
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
                 ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
@@ -165,7 +165,7 @@ require('packer').startup(function(use)
       { 'williamboman/mason-lspconfig.nvim' },
       { 'williamboman/mason.nvim' },
     },
-    config= function()
+    config = function()
       require("mason").setup()
       require("mason-lspconfig").setup()
       local lspconfig = require('lspconfig')
@@ -174,23 +174,16 @@ require('packer').startup(function(use)
       lspconfig.ruff.setup {
         init_options = {
           settings = {
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {
-              "--select", "ALL",
-              "--ignore", "FA100",
-              "--ignore", "PD",
-              "--ignore", "ANN101",
-              "--ignore", "EM",
-              "--ignore", "G004",
-              "--config", "lint.pydocstyle.convention='google'",
-            },
+            lint = {
+              select = { "F401" }
+            }
           }
         }
       }
       -- Setting up pyright for go to def type behavior
-      lspconfig.pyright.setup{
+      lspconfig.pyright.setup {
         settings = {
-        pyright = {
+          pyright = {
             -- Using Ruff's import organizer
             disableOrganizeImports = true,
           },
@@ -202,7 +195,7 @@ require('packer').startup(function(use)
           },
         },
       }
-      lspconfig.gopls.setup {                                 -- go
+      lspconfig.gopls.setup { -- go
         cmd = { "gopls", "serve" },
         filetypes = { "go", "gomod" },
         root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
@@ -220,14 +213,14 @@ require('packer').startup(function(use)
   use {
     "danymat/neogen",
     config = function()
-        require('neogen').setup{}
+      require('neogen').setup {}
     end,
     -- Uncomment next line if you want to follow only stable versions
     -- tag = "*"
   }
 
   -- Language Tools
-  -- use { 
+  -- use {
   --   'fatih/vim-go',
   --   config = function()
   --     vim.g.go_gopls_enabled = 0
@@ -237,38 +230,38 @@ require('packer').startup(function(use)
   -- Code Faster
   use {
     "windwp/nvim-autopairs",
-      config = function() require("nvim-autopairs").setup {} end
+    config = function() require("nvim-autopairs").setup {} end
   }
-  use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require('copilot').setup({
-        suggestion = { enabled = false },
-        panel = {
-          enabled = true,
-          auto_refresh = false,
-          keymap = {
-            jump_prev = "<Tab>",
-            jump_next = "<S-Tab>",
-            accept = "<CR>",
-            refresh = "gr",
-            open = "<M-CR>",
-          },
-          layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.1
-          },
-        },
-      })
-    end,
-  }
+  -- use {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require('copilot').setup({
+  --       suggestion = { enabled = false },
+  --       panel = {
+  --         enabled = true,
+  --         auto_refresh = false,
+  --         keymap = {
+  --           jump_prev = "<Tab>",
+  --           jump_next = "<S-Tab>",
+  --           accept = "<CR>",
+  --           refresh = "gr",
+  --           open = "<M-CR>",
+  --         },
+  --         layout = {
+  --           position = "bottom", -- | top | left | right
+  --           ratio = 0.1
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- }
 
   use {
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua" },
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
     end
   }
@@ -294,12 +287,12 @@ require('packer').startup(function(use)
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp'},
-          { name = 'buffer'},
-          { name = 'copilot'},
+          { name = 'nvim_lsp' },
+          { name = 'buffer' },
+          { name = 'copilot' },
         })
       })
 
@@ -314,3 +307,22 @@ require('packer').startup(function(use)
     end
   }
 end)
+      --       lspconfig.ruff.setup {
+      --         init_options = {
+      --           settings = {
+      --             lint = {
+      --               extendSelect = { "F401" },
+      --             }
+      --             -- Any extra CLI arguments for `ruff` go here.
+      --             -- args = {
+      --             --   "--ignore", "FA100",
+      --             --   "--ignore", "PD",
+      --             --   "--ignore", "ANN101",
+      --             --   "--ignore", "EM",
+      --             --   "--ignore", "G004",
+      --             --   "--config", "lint.pydocstyle.convention='google'",
+      --             --   "--extend-select", "F401",
+      --             -- },
+      --           }
+      --         }
+      --       }
