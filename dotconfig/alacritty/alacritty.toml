@@ -242,10 +242,12 @@ action = "Copy"
 key = "C"
 mods = "Alt"
 
-[shell]
+[terminal.shell]
 args = ["-l", "-c", "tmux attach"]
 program = "zsh"
 
 [window]
 dynamic_padding = true
 startup_mode = "Fullscreen"
+
+[terminal]

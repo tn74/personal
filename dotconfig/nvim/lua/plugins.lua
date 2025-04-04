@@ -95,7 +95,9 @@ require('packer').startup(function(use)
   use {
     'stevearc/aerial.nvim',
     config = function()
-      require("aerial").setup()
+      require("aerial").setup({
+        disable_max_lines=1000000,
+      })
     end
   }
 
@@ -232,39 +234,6 @@ require('packer').startup(function(use)
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
-  -- use {
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require('copilot').setup({
-  --       suggestion = { enabled = false },
-  --       panel = {
-  --         enabled = true,
-  --         auto_refresh = false,
-  --         keymap = {
-  --           jump_prev = "<Tab>",
-  --           jump_next = "<S-Tab>",
-  --           accept = "<CR>",
-  --           refresh = "gr",
-  --           open = "<M-CR>",
-  --         },
-  --         layout = {
-  --           position = "bottom", -- | top | left | right
-  --           ratio = 0.1
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- }
-
-  use {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end
-  }
 
   -- Completion Engine
   use 'hrsh7th/cmp-nvim-lsp'
@@ -292,7 +261,6 @@ require('packer').startup(function(use)
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'buffer' },
-          { name = 'copilot' },
         })
       })
 
