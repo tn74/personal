@@ -2,8 +2,10 @@ local myPackages = {
   "options",
   "plugins",
   "mappings",
-  "cmd"
+  "cmd",
+  "lsptn",
 }
+
 
 function Load()
   for _, p in pairs(myPackages) do require(p) end

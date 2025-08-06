@@ -96,7 +96,7 @@ require('packer').startup(function(use)
     'stevearc/aerial.nvim',
     config = function()
       require("aerial").setup({
-        disable_max_lines=1000000,
+        disable_max_lines = 1000000,
       })
     end
   }
@@ -161,56 +161,14 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   --  LSP
+  -- use 'williamboman/mason.nvim'
+  -- use 'williamboman/mason-lspconfig.nvim'
   use {
     'neovim/nvim-lspconfig',
     requires = {
       { 'williamboman/mason-lspconfig.nvim' },
       { 'williamboman/mason.nvim' },
     },
-    config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup()
-      local lspconfig = require('lspconfig')
-      -- Language Servers
-      lspconfig.lua_ls.setup({}) --lua
-      lspconfig.ruff.setup {
-        init_options = {
-          settings = {
-            lint = {
-              select = { "F401" }
-            }
-          }
-        }
-      }
-      -- Setting up pyright for go to def type behavior
-      lspconfig.pyright.setup {
-        settings = {
-          pyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-          },
-          python = {
-            analysis = {
-              -- Ignore all files for analysis to exclusively use Ruff for linting
-              ignore = { '*' },
-            },
-          },
-        },
-      }
-      lspconfig.gopls.setup { -- go
-        cmd = { "gopls", "serve" },
-        filetypes = { "go", "gomod" },
-        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-        settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            staticcheck = true,
-          },
-        },
-      }
-    end
   }
   use {
     "danymat/neogen",
@@ -275,22 +233,3 @@ require('packer').startup(function(use)
     end
   }
 end)
-      --       lspconfig.ruff.setup {
-      --         init_options = {
-      --           settings = {
-      --             lint = {
-      --               extendSelect = { "F401" },
-      --             }
-      --             -- Any extra CLI arguments for `ruff` go here.
-      --             -- args = {
-      --             --   "--ignore", "FA100",
-      --             --   "--ignore", "PD",
-      --             --   "--ignore", "ANN101",
-      --             --   "--ignore", "EM",
-      --             --   "--ignore", "G004",
-      --             --   "--config", "lint.pydocstyle.convention='google'",
-      --             --   "--extend-select", "F401",
-      --             -- },
-      --           }
-      --         }
-      --       }

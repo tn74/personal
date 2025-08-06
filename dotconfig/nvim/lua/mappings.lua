@@ -93,6 +93,3 @@ keymap('n', '<leader>a', ":AerialToggle<CR>")
 bufnav('n', 'a', aerial.next, aerial.prev)
 bufnav('n', 's', gs.next_hunk, gs.prev_hunk)
 bufnav('n', 'd', vim.diagnostic.goto_next, vim.diagnostic.goto_next)
-
--- Neogen
-keymap('n', '<leader>cd', ":Neogen <Enter>")
