@@ -1,2 +1,3 @@
 **.swp
 dotconfig/github-copilot/**
+dotconfig/nvim/plugin/packer_compiled.lua
