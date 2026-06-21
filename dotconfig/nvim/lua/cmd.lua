@@ -8,6 +8,21 @@ end
 
 vim.cmd("colorschem ayu")
 
+local colors = {
+  [2] = '#C84A4A', -- DiffRemoved
+  [3] = '#51A03B', -- DiffAdded
+  [4] = '#4AACC8', -- DiffChanged
+}
+
+vim.api.nvim_set_hl(0, 'DiffAdded', { fg = colors[3], bold = true })
+vim.api.nvim_set_hl(0, 'DiffRemoved', { fg = colors[2], bold = true })
+vim.api.nvim_set_hl(0, 'DiffChanged', { fg = colors[4], bold = true })
+vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#305F23' })
+vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#5F2323' })
+vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#23525F' })
+vim.api.nvim_set_hl(0, 'DiffText', { bg = '#5F4523' })
+
+
 augroup('setIndent', { clear = true })
 autocmd('Filetype', {
   group = 'setIndent',

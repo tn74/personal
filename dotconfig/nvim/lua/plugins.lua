@@ -40,6 +40,24 @@ require('packer').startup(function(use)
       }
     end
   }
+  use {
+    "sindrets/diffview.nvim",
+    config = function()
+
+      -- Setting  colors for diffview https://github.com/sindrets/diffview.nvim/issues/546
+      vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#305F23' })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#5F2323' })
+      vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#23525F' })
+      vim.api.nvim_set_hl(0, 'DiffText', { bg = '#5F4523' })
+      vim.api.nvim_set_hl(0, 'DiffAdded', { fg = '#51A03B', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffRemoved', { fg = '#C84A4A', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffChanged', { fg = '#4AACC8', bold = true })
+
+      require('diffview').setup {
+        enhanced_diff_hl = true
+      }
+    end
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter',
